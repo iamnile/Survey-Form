@@ -1,0 +1,130 @@
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="CeruleanBootstrap.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    
+    <?php
+$action=$_REQUEST['action'];
+if ($action=="")    /* display the contact form */
+    {
+    ?>
+       <div style="text-align:center; -webkit-transition:all .2s ease-in-out; "> <h1 style=" text-align:center;">MobileSmith Prototype Request</h1>
+        <h3 style=" text-align:center; ">Please Use This Form to Request a Proof of Concept App.</h3></div>
+    <br />
+   <div class="container">
+     
+       <div class="col-md-3"></div>
+	   <div class="col-md-6">
+		<div class="well">
+        <form role="form" enctype="text/plain" action="sendFormMail.php" method="post">
+            <br />
+            <div class="form-group">
+            <label for="companyName">Name of Company</label>
+                <input name="NameofCompany" type="text" required class="form-control" id="companyName"/>
+            </div>
+
+            <div class="form-group">
+            <label for="websiteURL">Website URL</label>
+                <input name="Website URL" type="text" required class="form-control" id="websiteURL"/>
+            </div>
+
+            <div class="form-group">
+            <label for="brandingGuidelines">Branding Guidelines</label>
+                <input name="Branding Guidelines" type="text" required class="form-control" id="brandingGuidelines"/>
+            </div>
+
+            <div class="form-group">
+            <label for="desiredFnD">Desired Functionality & Data</label>
+                <input type="text" id="desiredFnD" class="form-control" name="Desired Funtionality and Data"/>
+            </div>
+
+            <div class="form-group">
+            <label for="dataLocation">Where is the Data Located?</label>
+                <input type="text" id="dataLocation" class="form-control" name="dataLocation"/>
+            </div>
+
+            <div class="form-group">
+            <label class="text-danger" for="dataMethod">Remember to Attatch the Data in the Email When You Submit</label>
+            </div>
+
+			<div class="form-group">
+            <label for="dataLocation">Desired Navigation Method</label>
+                <select id="dataLocation" class="form-control" name="desiredNavigationMethod">
+                    <option>Choose One</option>
+                    <option>Fly-Out Menu</option>
+                    <option>Tabs Menu</option>
+                    <option>No Menu</option>
+           </select> 
+           </div>
+
+
+            <div class="form-group">
+            <label for="dataLocation">Desired Access Method</label>
+                <select id="dataLocation" class="form-control" name="desiredAccessMethod">
+                    <option>Choose One</option>
+                    <option>Unrestricted</option>
+                    <option>App Activation</option>
+                    <option>Registration Required</option>
+           		</select> 
+           </div>
+			
+            <div class="form-group">
+            <label for="dataLocation">Specific UI Requests</label>
+                <input type="text" id="dataLocation" class="form-control" name="specificUIrequests"/>
+            </div>
+
+            <div class="form-group">
+            <label for="dataLocation">Existing Prototype You'd Like to Model</label>
+                <input type="text" id="dataLocation" class="form-control" name="existingPrototype"/>
+            </div>
+
+            <div class="form-group">
+            <label for="dataLocation">Desired Deadline (1 Week From Submission)</label>
+                <input type="date" id="dataLocation" class="form-control" name="desiredDeadline"/>
+            </div>
+
+            <div class="form-group">
+            <label for="dataLocation">Notes</label>
+                <textarea id="dataLocation" class="form-control" name="notes">
+                    Enter comments Here
+                </textarea>
+            </div>
+
+           <input type="submit" class="btn btn-primary">
+
+
+            
+
+
+			</div>
+         </form>
+		 </div>
+		 <div class="col-md-3"></div>
+       </div>
+      
+    </div>
+</body>
+</html>
+<?php
+ } 
+else                /* send the submitted data */
+    {
+    $name=$_REQUEST['name'];
+    $email=$_REQUEST['email'];
+    $message=$_REQUEST['message'];
+    if (($name=="")||($email=="")||($message==""))
+        {
+		echo "All fields are required, please fill <a href=\"\">the form</a> again.";
+	    }
+    else{		
+	    $from="From: $name<$email>\r\nReturn-path: $email";
+        $subject="Message sent using your contact form";
+		mail("youremail@yoursite.com", $subject, $message, $from);
+		echo "Email sent!";
+	    }
+    }  
+?>
